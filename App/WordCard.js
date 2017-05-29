@@ -10,8 +10,8 @@ import {
 } from 'native-base';
 
 export default (english, kanji, romaji, character) => {
-    const kanji = kanji ? '【' + kanji + '】' : null;
-    const mainLine = kanji ? character + '  ' + kanji : character;
+    const kanjiWithBracket = kanji ? '【' + kanji + '】' : null;
+    const mainLine = kanjiWithBracket ? character + '  ' + kanjiWithBracket : character;
     return <Card>
         <CardItem>
             <Body>
