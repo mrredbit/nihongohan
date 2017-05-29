@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {
-    AsyncStorage,
-    StyleSheet
+    AsyncStorage
 } from 'react-native';
 import {
     Container,
@@ -14,16 +13,20 @@ import {
     Right,
     Body,
     Text,
-    StyleProvider
+    StyleProvider,
+    Card,
+    CardItem
 } from 'native-base';
 
 import WordCard from './WordCard';
 import CharactersList from './CharactersList';
+import Swiper from 'react-native-swiper';
 
 import getTheme from '../native-base-theme/components';
 import customColor from '../native-base-theme/variables/customColor';
 import dsWords from '../data/words';
 import dsCharacters from '../data/characters';
+
 
 export default class Main extends Component {
     constructor() {
@@ -82,14 +85,14 @@ export default class Main extends Component {
             section = this.state.words.map((word => {
                 let character = word.hiragana ? word.hiragana : word.katakana;
                 return <WordCard key={word.english}
-                                 word={word.english}
-                                 kanji={word.kanji }
+                                 english={word.english}
+                                 kanji={word.kanji}
                                  romaji={word.romaji}
                                  character={character}/>
             }))
         } else if (this.state.section === 'CHARACTERS') {
             section = <CharactersList characters={this.state.characters}/>
-        }
+        } 
 
         return (
             <StyleProvider style={getTheme(customColor)}>
@@ -119,8 +122,8 @@ export default class Main extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = {
     container: {backgroundColor: '#f4f4f4'},
     title: {fontSize: 18},
     sectionButton: {fontSize: 18, lineHeight: 24}
-});
+};

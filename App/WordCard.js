@@ -9,7 +9,7 @@ import {
     CardItem
 } from 'native-base';
 
-export default (english, kanji, romaji, character) => {
+export default ({english, kanji, romaji, character}) => {
     const kanjiWithBracket = kanji ? '【' + kanji + '】' : null;
     const mainLine = kanjiWithBracket ? character + '  ' + kanjiWithBracket : character;
     return <Card>
@@ -23,8 +23,8 @@ export default (english, kanji, romaji, character) => {
     </Card>
 }
 
-const styles = StyleSheet.create({
+const styles = {
     english: {fontWeight: 'bold', marginBottom: 5},
     mainLine: {fontSize: 20, lineHeight: 26},
     romaji: {fontSize: 12, color: '#aaa'}
-});
+};
