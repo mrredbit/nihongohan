@@ -13,14 +13,11 @@ import {
     Right,
     Body,
     Text,
-    StyleProvider,
-    Card,
-    CardItem
+    StyleProvider
 } from 'native-base';
 
-import WordCard from './WordCard';
+import WordCardList from './WordCardList';
 import CharactersList from './CharactersList';
-import Swiper from 'react-native-swiper';
 
 import getTheme from '../native-base-theme/components';
 import customColor from '../native-base-theme/variables/customColor';
@@ -82,17 +79,10 @@ export default class Main extends Component {
     render() {
         let section;
         if (this.state.section === 'WORDS') {
-            section = this.state.words.map((word => {
-                let character = word.hiragana ? word.hiragana : word.katakana;
-                return <WordCard key={word.english}
-                                 english={word.english}
-                                 kanji={word.kanji}
-                                 romaji={word.romaji}
-                                 character={character}/>
-            }))
+            section = <WordCardList words={this.state.words}/>
         } else if (this.state.section === 'CHARACTERS') {
             section = <CharactersList characters={this.state.characters}/>
-        } 
+        }
 
         return (
             <StyleProvider style={getTheme(customColor)}>
