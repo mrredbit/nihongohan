@@ -6,7 +6,9 @@ import {
     Picker,
     Item,
     Grid,
-    Col
+    Col,
+    Body,
+    Card
 } from 'native-base';
 
 export default class WordCardList extends Component {
@@ -20,7 +22,8 @@ export default class WordCardList extends Component {
 
     render() {
         const {words, categories, sections} = this.props;
-        const filter = <Content>
+        const filter = <Card>
+            <Body>
             <Grid>
                 <Col>
                     <Picker mode="dropdown"
@@ -33,7 +36,7 @@ export default class WordCardList extends Component {
                                 });
                             }}
                             style={styles.filter}>
-                        <Item label="All Section" value="all"/>
+                        <Item label="All Sections" value="all"/>
                         { sections && sections.map(section => {
                             if (section) {
                                 return <Item label={section} value={section}/>
@@ -52,7 +55,7 @@ export default class WordCardList extends Component {
                                 });
                             }}
                             style={styles.filter}>
-                        <Item label="All Category" value="all"/>
+                        <Item label="All Categories" value="all"/>
                         { categories && categories.map(category => {
                             if (category) {
                                 return <Item label={category} value={category}/>
@@ -61,7 +64,8 @@ export default class WordCardList extends Component {
                     </Picker>
                 </Col>
             </Grid>
-        </Content>
+            </Body>
+        </Card>
 
         return <Content>
             <Content>
@@ -89,11 +93,6 @@ export default class WordCardList extends Component {
 const styles = {
     filter: {
         backgroundColor: '#fff',
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: 2},
-        shadowOpacity: 0.1,
-        shadowRadius: 1.5,
-        color: '#000',
-        marginBottom: 5
+        color: '#000'
     }
 }
