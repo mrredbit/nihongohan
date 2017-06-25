@@ -89,6 +89,11 @@ export default class WordCardList extends Component {
 const styles = {
     filter: {
         backgroundColor: '#fff',
-        color: '#000'
+        shadowColor: '#000',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.1,
+        shadowRadius: 1.5,
+        color: '#000',
+        marginBottom: 5
     }
 }
