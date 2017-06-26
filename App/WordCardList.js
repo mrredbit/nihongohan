@@ -4,24 +4,32 @@ import WordCard from './WordCard';
 import {
     Content,
     Picker,
-    Item,
     Grid,
     Col,
     Body,
     Card
 } from 'native-base';
 
+const Item = Picker.Item;
+
 export default class WordCardList extends Component {
     constructor() {
         super();
         this.state = {
             category: 'all',
-            section: 'all'
+            section: 'Word of the Day'
         }
     }
 
     render() {
-        const {words, categories, sections} = this.props;
+        const {words, sections} = this.props;
+        let section;
+        if (sections) {
+            section = sections.filter(section => {
+                return section.name === this.state.section
+            });
+        }
+        const categories = section.length ? section[0].categories : [];
         const filter = <Card>
             <Body>
             <Grid>
@@ -32,14 +40,18 @@ export default class WordCardList extends Component {
                             selectedValue={this.state.section}
                             onValueChange={value => {
                                 this.setState({
-                                    section: value
+                                    section: value,
+                                    category: 'all'
                                 });
                             }}
                             style={styles.filter}>
-                        <Item label="All Sections" value="all"/>
+
                         { sections && sections.map(section => {
+                            if (section.name === 'all') {
+                                return <Item key="all" label="All Sections" value="all"/>
+                            }
                             if (section) {
-                                return <Item label={section} value={section}/>
+                                return <Item key={section.name} label={section.name} value={section.name}/>
                             }
                         })}
                     </Picker>
@@ -55,10 +67,12 @@ export default class WordCardList extends Component {
                                 });
                             }}
                             style={styles.filter}>
-                        <Item label="All Categories" value="all"/>
-                        { categories && categories.map(category => {
+                        { categories.map(category => {
+                            if (category === 'all') {
+                                return <Item key="all" label="All Categories" value="all"/>
+                            }
                             if (category) {
-                                return <Item label={category} value={category}/>
+                                return <Item key={category} label={category} value={category}/>
                             }
                         })}
                     </Picker>

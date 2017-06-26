@@ -30,7 +30,6 @@ export default class Main extends Component {
         super();
         this.state = {
             words: [],
-            categories: [],
             sections: [],
             characters: [],
             appSection: 'WORDS'
@@ -48,15 +47,6 @@ export default class Main extends Component {
             }
         });
 
-        AsyncStorage.getItem('categories', function (err, data) {
-            if (data !== null) {
-                const categories = JSON.parse(data);
-                self.setState({
-                    categories: categories
-                })
-            }
-        });
-
         AsyncStorage.getItem('sections', function (err, data) {
             if (data !== null) {
                 const sections = JSON.parse(data);
@@ -68,21 +58,12 @@ export default class Main extends Component {
 
         dsWords.getWordList().then((data) => {
             const words = data.words;
-            const categories = data.categories;
             const sections = data.sections;
 
             AsyncStorage.setItem('words', JSON.stringify(words), function () {
                 if (words !== null) {
                     self.setState({
                         words: words
-                    })
-                }
-            });
-
-            AsyncStorage.setItem('categories', JSON.stringify(categories), function () {
-                if (categories !== null) {
-                    self.setState({
-                        categories: categories
                     })
                 }
             });
@@ -120,7 +101,6 @@ export default class Main extends Component {
         let section;
         if (this.state.appSection === 'WORDS') {
             section = <WordCardList words={this.state.words}
-                                    categories={this.state.categories}
                                     sections={this.state.sections}/>
         } else if (this.state.appSection === 'CHARACTERS') {
             section = <CharactersList characters={this.state.characters}/>
